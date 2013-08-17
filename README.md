@@ -1,12 +1,11 @@
 logstamp
 ========
 
-Prefix log messages with a timestamp
-
-Overrides console.log, console.info, console.warn, and console.error to
-prefix timestamps. Similar to https://github.com/bahamas10/node-log-timestamp
-but doesn't get in the way of the console functions' application of 
-util.format to their arguments.
+Overrides console.log, console.info, console.warn, and console.error
+to prefix each log message with a timestamp. Similar to
+https://github.com/bahamas10/node-log-timestamp but not configurable
+and all arguments are passed untouched, allowing for the console
+functions' application of util.format.
 
 Example:
 ```js
