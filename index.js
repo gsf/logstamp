@@ -1,15 +1,17 @@
-var stamp = function (dest) {
-  dest.write('[' + new Date().toISOString() + '] ');
-}
+module.exports = function (cnsl, stamp) {
+  var stamp = stamp || function (out) {
+    out.write('[' + new Date().toISOString() + '] ');
+  };
 
-var log = console.log;
-console.log = console.info = function () {
-  stamp(console._stdout);
-  log.apply(console, arguments);
-};
+  var log = cnsl.log;
+  cnsl.log = cnsl.info = function () {
+    stamp(cnsl._stdout);
+    log.apply(cnsl, arguments);
+  };
 
-var warn = console.warn;
-console.warn = console.error = function () {
-  stamp(console._stderr);
-  warn.apply(console, arguments);
+  var warn = cnsl.warn;
+  cnsl.warn = cnsl.error = function () {
+    stamp(cnsl._stderr);
+    warn.apply(cnsl, arguments);
+  };
 };

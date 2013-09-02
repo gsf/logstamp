@@ -11,22 +11,21 @@ process.stderr.write = function () {
   err.push(arguments);
 };
 
-// Activate logstamp
-require('./')(console);
+// Activate logstamp with custom stamp
+require('./')(console, function (out) {
+  out.write('test');
+});
 
 console.log('sue');
 console.warn('bob');
 console.info('blip');
 console.error('blop');
 
-// Regex to test timestamp conformity
-var stampRe = /^\[\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}\.\d{3}Z\] $/;
-
-// Outputs and errputs 0 & 2 are timestamps
-assert(stampRe.test(out[0][0]));
-assert(stampRe.test(out[2][0]));
-assert(stampRe.test(err[0][0]));
-assert(stampRe.test(err[2][0]));
+// Outputs and errputs 0 & 2 are stamps
+assert.equal(out[0][0], 'test');
+assert.equal(out[2][0], 'test');
+assert.equal(err[0][0], 'test');
+assert.equal(err[2][0], 'test');
 
 // Log messages at positions 1 & 3
 assert.equal(out[1][0], 'sue\n');
