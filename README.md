@@ -19,11 +19,13 @@ Object: myRobot { number: 5 }
 [2013-08-17T21:37:16.212Z] Object: myRobot { number: 5 }
 ```
 
-A custom stamp can be passed in as the second parameter:
+If desired, a custom stamp can also be set:
 ```js
-require('logstamp')(console, function (out) {
+var logstamp = require('logstamp');
+logstamp(console);
+logstamp.stamp = function (out) {
   out.write(Date.now() + ' Server X ');
-});
+};
 console.log([1, 2, 3]);
 ```
 
