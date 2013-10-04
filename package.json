@@ -1,6 +1,6 @@
 {
   "name": "logstamp",
-  "version": "0.2.1",
+  "version": "0.3.0",
   "description": "Prefix log messages with a stamp",
   "homepage": "https://github.com/gsf/logstamp",
   "author": "Gabriel Farrell <g@grrawr.com>",
