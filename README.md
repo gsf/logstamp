@@ -22,11 +22,9 @@ Object: myRobot { number: 5 }
 
 If desired, a custom stamp can also be set:
 ```js
-var logstamp = require('logstamp');
-logstamp(console);
-logstamp.stamp = function () {
+require('logstamp')(console, function () {
   return Date.now() + ' Server X ';
-};
+});
 console.log([1, 2, 3]);
 ```
 

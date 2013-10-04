@@ -3,26 +3,26 @@ var stream = require('stream');
 var outStream = new stream.Writable({decodeStrings: false});
 var errStream = new stream.Writable({decodeStrings: false});
 
-module.exports = function (console_) {
+module.exports = function (console_, stamp) {
   var stdout = console_._stdout;
   var stderr = console_._stderr;
 
+  stamp = stamp || function () {
+    return '[' + new Date().toISOString() + '] ';
+  };
+
   outStream._write = function (chunk, encoding, callback) {
-    stdout.write(module.exports.stamp());
+    stdout.write(stamp());
     stdout.write(chunk);
     callback();
   };
 
   errStream._write = function (chunk, encoding, callback) {
-    stderr.write(module.exports.stamp());
+    stderr.write(stamp());
     stderr.write(chunk);
     callback();
   };
 
   console_._stdout = outStream;
   console_._stderr = errStream;
-};
-
-module.exports.stamp = function () {
-  return '[' + new Date().toISOString() + '] ';
 };

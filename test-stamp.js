@@ -12,11 +12,9 @@ process.stderr.write = function () {
 };
 
 // Activate logstamp and set custom stamp
-var logstamp = require('./');
-logstamp(console);
-logstamp.stamp = function () {
+require('./')(console, function () {
   return 'test';
-};
+});
 
 console.log('sue');
 console.warn('bob');
