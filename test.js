@@ -15,8 +15,8 @@ process.stderr.write = function () {
 require('./')(console);
 
 console.log('sue');
-console.warn('bob');
-console.info('blip');
+console.info(['blip']);
+console.warn({x: 'bob'});
 console.error('blop');
 
 // Regex to test timestamp conformity
@@ -30,6 +30,6 @@ assert(stampRe.test(err[2][0]));
 
 // Log messages at positions 1 & 3
 assert.equal(out[1][0], 'sue\n');
-assert.equal(out[3][0], 'blip\n');
-assert.equal(err[1][0], 'bob\n');
+assert.equal(out[3][0], "[ 'blip' ]\n");
+assert.equal(err[1][0], "{ x: 'bob' }\n");
 assert.equal(err[3][0], 'blop\n');

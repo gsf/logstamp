@@ -1,17 +1,28 @@
+var stream = require('stream');
+
+var outStream = new stream.Writable({decodeStrings: false});
+var errStream = new stream.Writable({decodeStrings: false});
+
 module.exports = function (console_) {
-  var log = console_.log;
-  console_.log = console_.info = function () {
-    module.exports.stamp(console_._stdout);
-    log.apply(console_, arguments);
+  var stdout = console_._stdout;
+  var stderr = console_._stderr;
+
+  outStream._write = function (chunk, encoding, callback) {
+    stdout.write(module.exports.stamp());
+    stdout.write(chunk);
+    callback();
   };
 
-  var warn = console_.warn;
-  console_.warn = console_.error = function () {
-    module.exports.stamp(console_._stderr);
-    warn.apply(console_, arguments);
+  errStream._write = function (chunk, encoding, callback) {
+    stderr.write(module.exports.stamp());
+    stderr.write(chunk);
+    callback();
   };
+
+  console_._stdout = outStream;
+  console_._stderr = errStream;
 };
 
-module.exports.stamp = function (out) {
-  out.write('[' + new Date().toISOString() + '] ');
+module.exports.stamp = function () {
+  return '[' + new Date().toISOString() + '] ';
 };

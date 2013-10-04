@@ -14,8 +14,8 @@ process.stderr.write = function () {
 // Activate logstamp and set custom stamp
 var logstamp = require('./');
 logstamp(console);
-logstamp.stamp = function (out) {
-  out.write('test');
+logstamp.stamp = function () {
+  return 'test';
 };
 
 console.log('sue');

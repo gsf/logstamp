@@ -1,10 +1,11 @@
 logstamp
 ========
 
-Overrides the passed-in console's log, info, warn, and error methods to prefix
-each message with a timestamp. Similar to
-https://github.com/bahamas10/node-log-timestamp but arguments are passed to
-console untouched, allowing for the application of util.format.
+Overrides the passed-in console's stdout and stderr streams to prefix
+each log message with a stamp. Similar to
+https://github.com/bahamas10/node-log-timestamp but console methods
+are untouched, so things like console.log's application of
+util.format still work.
 
 Example:
 ```js
@@ -23,8 +24,8 @@ If desired, a custom stamp can also be set:
 ```js
 var logstamp = require('logstamp');
 logstamp(console);
-logstamp.stamp = function (out) {
-  out.write(Date.now() + ' Server X ');
+logstamp.stamp = function () {
+  return Date.now() + ' Server X ';
 };
 console.log([1, 2, 3]);
 ```
