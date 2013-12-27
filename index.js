@@ -8,7 +8,7 @@ module.exports = function (console_, stamp) {
   var stderr = console_._stderr;
 
   stamp = stamp || function () {
-    return '[' + new Date().toISOString() + '] ';
+    return new Date().toISOString() + ' ';
   };
 
   outStream._write = function (chunk, encoding, callback) {
