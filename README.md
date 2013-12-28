@@ -1,4 +1,4 @@
-# logstamp
+# logstamp [![Build Status](https://secure.travis-ci.org/gsf/logstamp.png)](http://travis-ci.org/gsf/logstamp)
 
 Overrides the console's stdout and stderr streams to prefix
 each log message with a stamp. Similar to
