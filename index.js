@@ -3,9 +3,9 @@ var stream = require('stream');
 var outStream = new stream.Writable({decodeStrings: false});
 var errStream = new stream.Writable({decodeStrings: false});
 
-module.exports = function (console_, stamp) {
-  var stdout = console_._stdout;
-  var stderr = console_._stderr;
+module.exports = function (stamp) {
+  var stdout = console._stdout;
+  var stderr = console._stderr;
 
   stamp = stamp || function () {
     return new Date().toISOString() + ' ';
@@ -23,6 +23,6 @@ module.exports = function (console_, stamp) {
     callback();
   };
 
-  console_._stdout = outStream;
-  console_._stderr = errStream;
+  console._stdout = outStream;
+  console._stderr = errStream;
 };
