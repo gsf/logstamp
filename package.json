@@ -6,6 +6,9 @@
   "author": "Gabriel Farrell <g@grrawr.com>",
   "repository": "https://github.com/gsf/logstamp.git",
   "scripts": {
-    "test": "find test*.js | xargs -n 1 -t node"
+    "test": "find test/*test.js | xargs -n 1 -t node"
+  },
+  "devDependencies": {
+    "concat-stream": "~1.2.1"
   }
 }
